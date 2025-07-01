@@ -1,0 +1,22 @@
+body {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--dark-color);
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+body.not-loaded {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+body {
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.not-loaded * {
+  animation-play-state: paused !important;
+}

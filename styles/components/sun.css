@@ -1,0 +1,15 @@
+/* ——— The Sun ——— */
+.sun {
+  position: fixed;
+  top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15vmin;
+  height: 15vmin;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff59d, #ffca28);
+  filter: drop-shadow(0 0 1vmin rgba(255,200,0,0.7));
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 5;
+}

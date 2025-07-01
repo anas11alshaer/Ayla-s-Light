@@ -4,11 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flower Animation</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/components/note.css" />
+
 </head>
 <body class="not-loaded">
   <!-- MODE TOGGLE -->
    <button id="modeToggle" class="mode-toggle" aria-label="Toggle Day / Night Mode">🌙</button>
+  <!-- top-right controls -->
+   <button id="messageToggle" class="message-toggle" aria-label="Show comforting message">💌</button>
         <div class="night"></div>
         <!-- SUN FOR DAY MODE -->
          <div class="sun"></div>
@@ -23,7 +27,6 @@
               <div class="flower__leaf flower__leaf--2"></div>
               <div class="flower__leaf flower__leaf--3"></div>
               <div class="flower__leaf flower__leaf--4"></div>
-              
 
               <div class="flower__white-circle"></div>
       
@@ -314,6 +317,36 @@
             </div>
           </div>
         </div>
+    <!--  ✏️  Message paper -->
+      <div id="note" class="note" role="dialog" aria-modal="true">
+      <button id="noteClose" class="note__close" aria-label="Close">✕</button>
+      <p class="note__text">  <p class="note__text">
+To my cute little Candy 🌸,
+
+Ayla, you... ✨  
+You really make me speechless sometimes 💖. You really fill my heart with joy 🌷. I know I repeat everything that I say every single day, but I really do mean it. Yesterday and today, I realized how much you mean to me, and how much light you bring into my life 🌞. These two days were really not fun 😔. I know, you think that they are just normal work days, but they really weren't. I know that because deep down in my heart I was really, really sad. You may have not realized this, but my heart is attached to Ayla 🤍. Those two days where we were both busy felt like an eternity ⏳.
+
+There were days where I felt all alone, but you are like hope to me now 🌟. No matter how buried I get or how lost I feel during my day, you make me hold on to hope that my days will be better. You keep it alive 🔥. You make my suffering feel like nothing. As I look around myself and overthink, I realize that you make me feel ME. Sometimes, I wish that I can be this same hope for you. I am not sure if I will be able to achieve that, but I want you to know that I will do everything to do so 🤲.
+
+You are so amazing with how you carry yourself. You came into my life and you were like a shot of espresso ☕️⚡️. You are like being bathed in sunlight ☀️, the way you light up my world. You are incredibly energetic and enthusiastic. You have this sense of play and fun, which are incredibly exciting 🎈.
+
+I wanna do life with you, and that's it. That's all. I don't want anything else from you, but I wanna do it with you—whether it's through the ups and downs, I don't give a shit. I wanna experience every single high and every single low and the amazing joys of life with you 🌈.
+
+Words can never describe how much love I feel for you 💞. I really do mean it when I say that my heart loves you ❤️. Looking at you every single day and how cute you are makes me so grateful 🙏. I feel truly blessed, wallah. You are the shining star in my life ✨. I wanna be yours as well. I wanna be a special person for you—someone you look to when you need something. But just know that no matter what, I will always be there, even when you don't ask 🫶.
+
+If I could take every piece of love I have for you and lay it out in words, it would stretch farther than any road 🛤️, deeper than any silence 🌊, and louder than any fight 🔔. Because my love for you isn't made of perfect moments. It's built in the mess. In the "I'm sorry's" and the "I didn't mean it like that". In the way I look at you when you are not watching 👀. In the way my whole body exhales when you talk to me 😌. In the ache I feel when you pull away—not just physically, but emotionally. That ache? That's how I know you matter more than anything.
+
+You are not a chapter story. You are **the** STORY 📖. And even when we hit the parts that are hard to read, I still choose you. I still want to turn every page with you, even if it hurts sometimes 💔➡️💗. Because no ending would ever feel right if it didn't have your name in it.
+
+When I say my heart loves you, I don't mean just the soft, sweet parts. I mean the you that doubts, the you that shuts down, the you that gets quiet when you are overwhelmed 😣. I love the girl who fights hard, even when she's scared 💪. Who pulls away, but deep down just wants to be pulled closer 🤗. And if I could make you feel just one thing right now—truly feel it—it's this: **You are worth staying for, fighting for, growing with** 🌱.
+
+When you look at me and wonder why I do all this, why I still try... it's because my soul has tasted a future with you 🕊️. And nothing else comes close. Not the silence, not the comfort of giving up—nothing.
+
+You are **my person** 💍. Not just because of who you are at your best, but because of who you are in your worst moments, too. Even when you are tired, even when you push me away, even when you don't believe in yourself, I still believe in you—and always will 🌺. If you ever forget who you are, or what we have, I'll be right here, holding the memory of us until you can feel it again 🫂. Until we can both come home to each other—not just in the same space, but in the same heart 🏡❤️.
+
+You are not just loved. **You are my once-in-a-lifetime** 🌠.
+      </p>
+    </div>
         <script src="java.js"></script>
       </body>
 </html>

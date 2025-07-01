@@ -1,0 +1,102 @@
+/* ——— Day Mode Overrides ——— */
+body.day-mode .sun {
+  opacity: 1;
+  animation:
+    sun-rise 2s ease-out forwards,
+    sun-pulse 4s ease-in-out 2s infinite alternate;
+}
+
+/* ——— Day / Night Mode Overrides (updated palette) ——— */
+
+/* overall page background */
+body.day-mode {
+  background-color: #E0F7FA; /* pale cyan */
+}
+
+/* sky gradient layer */
+body.day-mode .night {
+  background-image:
+    /* soft morning glow at top */
+    radial-gradient(ellipse at top, #FFF8E1 0%, #FFE0B2 70%),
+    /* subtle cloud/noise overlay */
+    repeating-linear-gradient(220deg,
+      rgba(255,255,255,0.15) 0px,
+      rgba(255,255,255,0.15) 19px,
+      transparent 19px,
+      transparent 22px
+    ),
+    /* gentle sky blue horizon */
+    linear-gradient(90deg, #81D4FA, #B3E5FC);
+}
+
+/* leaf colors */
+body.day-mode .flower__leaf {
+  background-image: linear-gradient(to top, #8BC34A, #DCEDC8);
+}
+
+/* flower center highlight */
+body.day-mode .flower__white-circle {
+  background-color: #FFF9C4; /* very light yellow */
+}
+
+/* sparkles / lights */
+body.day-mode .flower__light {
+  background-color: #FFF59D; /* pale sunshine */
+}
+
+/* 🌸 Petals */
+body.day-mode .flower__leaf {
+  background-image:
+    linear-gradient(to bottom right, #ff6b6b, #ff8a80, #ffb3b3);
+  box-shadow: none;
+  border-radius: 50%;
+  opacity: 0.95;
+}
+
+/* 🌿 Stems / Roots / Branches */
+body.day-mode .flower__leafs::before,
+body.day-mode .leaf {
+  background-image: linear-gradient(to top, #a8e6cf, #dcedc1);
+  box-shadow: none;
+  opacity: 0.95;
+}
+
+/* 🌼 Flower Center (Glossy Circle) */
+body.day-mode .flower__white-circle {
+  background: radial-gradient(circle at 30% 30%, #fffde7, #fff59d);
+  box-shadow: none;
+  border-radius: 50%;
+}
+
+/* ✨ Light Sparkles */
+body.day-mode .flower__light {
+  background-color: #fff9c4;
+  box-shadow: none;
+}
+
+/* 🌄 Enhanced Daylight Background */
+body.day-mode .night {
+  background-image:
+    /* ☀️ Sunbeam glow */
+    radial-gradient(circle at 50% 15%, rgba(255, 223, 150, 0.4) 0%, transparent 60%),
+
+    /* ☁️ Soft clouds */
+    radial-gradient(ellipse at 60% 30%, rgba(255,255,255,0.15) 0%, transparent 70%),
+    radial-gradient(ellipse at 40% 35%, rgba(255,255,255,0.1) 0%, transparent 80%),
+
+    /* 🌅 Sunrise gradient */
+    linear-gradient(to bottom,
+      #ffe6b7 0%,
+      #ffe0c0 20%,
+      #ffb1c1 50%,
+      #e4d2ff 75%,
+      #c2e9fb 100%
+    );
+  transition: background-image 1s ease;
+}
+
+/* Show sunbeams and clouds in day mode */
+body.day-mode .sunbeams,
+body.day-mode .clouds {
+  opacity: 1;
+}

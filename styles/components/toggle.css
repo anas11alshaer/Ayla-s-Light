@@ -1,0 +1,23 @@
+/* ——— Mode Toggle Button ——— */
+.mode-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 999;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+.mode-toggle:hover {
+  background: rgba(255,255,255,0.4);
+}
+/* Switch icon color in day mode */
+body.day-mode .mode-toggle {
+  color: #000;
+}

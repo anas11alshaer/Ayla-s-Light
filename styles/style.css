@@ -1,0 +1,14 @@
+/* style.css  – stays as the single entry-point */
+@import url("reset.css");
+@import url("base.css");
+@import url("variables.css");
+@import url("animations.css");
+@import url("themes.css");
+@import url("components/flowers.css");
+@import url("components/grass.css");
+@import url("components/night.css");
+@import url("components/petals.css");
+@import url("components/plants.css");
+@import url("components/sun.css");
+@import url("components/sunbeams-clouds.css");
+@import url("components/toggle.css");

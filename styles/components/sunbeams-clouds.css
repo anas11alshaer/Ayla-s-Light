@@ -1,0 +1,42 @@
+/* ☀️ Animated Sunbeams */
+.sunbeams,
+.clouds {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.sunbeams {
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 223, 150, 0.12) 0deg,
+    transparent 30deg,
+    rgba(255, 223, 150, 0.12) 60deg,
+    transparent 90deg
+  );
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.6) 0%, transparent 80%);
+  z-index: 1;
+  animation: spin-rays 60s linear infinite;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.clouds {
+  background-image:
+    radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 70%),
+    radial-gradient(circle at 60% 60%, rgba(255, 255, 255, 0.07) 0%, transparent 60%),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.08) 0%, transparent 80%);
+  background-repeat: no-repeat;
+  z-index: 2;
+  animation: drift-clouds 120s linear infinite;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+body.day-mode .sunbeams,
+body.day-mode .clouds {
+  opacity: 1;
+}
