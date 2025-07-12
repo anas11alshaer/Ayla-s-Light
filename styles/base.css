@@ -1,3 +1,7 @@
+:root {
+  --dark-color: #000;
+}
+
 body {
   display: flex;
   align-items: flex-end;
@@ -12,6 +16,7 @@ body.not-loaded {
   opacity: 0;
   transition: opacity 1s ease;
 }
+
 body {
   opacity: 1;
   transition: opacity 1s ease;

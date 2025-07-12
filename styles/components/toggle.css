@@ -14,9 +14,11 @@
   color: #fff;
   transition: background 0.3s ease;
 }
+
 .mode-toggle:hover {
   background: rgba(255,255,255,0.4);
 }
+
 /* Switch icon color in day mode */
 body.day-mode .mode-toggle {
   color: #000;

@@ -18,31 +18,33 @@ Designed with emotional care and aesthetic precision.
 
 ## 📁 Folder Structure
 
-/aylas-light
+/Aylas-Light
 │
-├── index.html # Main HTML structure and layout
-├── java.js # JS logic for toggling day/night mode & note interaction
-├── README.md # Project description and setup info
+├── index.html                  # Main HTML layout & structure
+├── java.js                     # Main JS logic (UI, firefly logic, notes)
+├── scripts/
+│   └── fireflyApp.js           # Firefly animation (canvas) – modular alternative
 │
-├── /styles # Main CSS directory
-│ ├── reset.css # Resets browser defaults
-│ ├── base.css # Core layout and structural styling
-│ ├── variables.css # CSS custom properties (colors, units, etc.)
-│ ├── animations.css # Keyframe animations
-│ ├── themes.css # Day/Night mode theme overrides
-│ ├── responsive.css # Responsive scaling for mobile
-│ └── style.css # Entry point that imports all styles
+├── README.md                   # Project documentation
 │
-├── /styles/components # Modular component styling
-│ ├── flowers.css # Flower visuals and animation
-│ ├── grass.css # Grass elements and movement
-│ ├── petals.css # Foreground and frame petals
-│ ├── plants.css # Long-stalk and sprout growths
-│ ├── sun.css # Sun element visuals
-│ ├── sunbeams-clouds.css # Daytime atmosphere (sun rays, clouds)
-│ ├── night.css # Nighttime sky effects
-│ ├── toggle.css # Toggle button styling
-│ └── note.css # Message pop-up styling
+├── /assets                     # (Optionally: images, sounds, etc.)
+│
+├── /styles                     # Core + modular CSS
+│   ├── reset.css               # Browser reset
+│   ├── base.css                # Base styles, colors, layout
+│   ├── animations.css          # Keyframes, all major CSS animations
+│   ├── themes.css              # Day/Night color themes & overrides
+│   ├── responsive.css          # Mobile/tablet scaling & tweaks
+│   ├── style.css               # Entry point – imports everything
+│   └── /components/            # All scene/element modules
+│       ├── flowers.css
+│       ├── grass.css
+│       ├── petals.css
+│       ├── plants.css
+│       ├── scene.css
+│       ├── jar.css
+│       ├── note.css
+│       ├── toggle.css
 
 ---
 

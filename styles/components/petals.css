@@ -96,7 +96,9 @@
   height: 10vmin;
   border-radius: 100% 0% 0% 100%/100% 100% 0% 0%;
   box-shadow: inset 0 2px 1vmin rgba(44, 238, 252, 0.2);
-  background-image: linear-gradient(to bottom left, transparent, var(--dark-color)), linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
+  background-image:
+    linear-gradient(to bottom left, transparent, var(--dark-color)),
+    linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
   -webkit-mask-image: linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
   mask-image: linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
 }
@@ -129,7 +131,9 @@
   height: 10vmin;
   border-radius: 100% 0% 0% 100%/100% 100% 0% 0%;
   box-shadow: inset 0 2px 1vmin rgba(44, 238, 252, 0.2);
-  background-image: linear-gradient(to bottom left, transparent, var(--dark-color) 98%), linear-gradient(to bottom right, #23f0ff 45%, transparent 50%, transparent);
+  background-image:
+    linear-gradient(to bottom left, transparent, var(--dark-color) 98%),
+    linear-gradient(to bottom right, #23f0ff 45%, transparent 50%, transparent);
   mask-image: linear-gradient(135deg, #159faa 40%, transparent 50%, transparent);
 }
 

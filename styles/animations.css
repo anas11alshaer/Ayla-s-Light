@@ -50,7 +50,8 @@
 
 /* Long-grass gentle sway */
 @keyframes flower-g-long-ans {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-30deg) rotateY(-20deg);
   }
   50% {
@@ -60,7 +61,8 @@
 
 /* Leaf flutter */
 @keyframes leaf-ans-1 {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-5deg) scale(1);
   }
   50% {
@@ -68,7 +70,8 @@
   }
 }
 @keyframes leaf-ans-2 {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotateY(-180deg) rotate(5deg);
   }
   50% {
@@ -76,7 +79,8 @@
   }
 }
 @keyframes leaf-ans-3 {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-10deg) rotateY(-180deg);
   }
   50% {
@@ -120,7 +124,8 @@
 
 /* Flower bob */
 @keyframes moving-flower-1 {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(2deg);
   }
   50% {
@@ -128,7 +133,8 @@
   }
 }
 @keyframes moving-flower-2 {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(18deg);
   }
   50% {
@@ -136,7 +142,8 @@
   }
 }
 @keyframes moving-flower-3 {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-18deg);
   }
   50% {
@@ -171,7 +178,8 @@
 
 /* Grass sway */
 @keyframes moving-grass {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-48deg) rotateY(40deg);
   }
   50% {
@@ -179,7 +187,8 @@
   }
 }
 @keyframes moving-grass--2 {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(0.5) rotate(75deg) rotateX(10deg) rotateY(-200deg);
   }
   50% {
@@ -194,7 +203,8 @@
 
 /* Right-leaning flower stalk */
 @keyframes flower-g-right-ans {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(20deg);
   }
   50% {
@@ -202,7 +212,8 @@
   }
 }
 @keyframes flower-g-right-ans--2 {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotateY(-180deg) rotate(0deg) rotateX(-20deg);
   }
   50% {
@@ -222,7 +233,8 @@
   }
 }
 @keyframes flower__g-front-ans {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-28deg) rotateY(30deg) scale(1.04);
   }
   50% {
@@ -232,7 +244,8 @@
 
 /* Framing petals animation */
 @keyframes flower__g-fr-ans {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(2deg);
   }
   50% {
@@ -283,8 +296,12 @@
   }
 }
 @keyframes sun-pulse {
-  from   { transform: translateX(-50%) scale(1); }
-  to     { transform: translateX(-50%) scale(1.1); }
+  from {
+    transform: translateX(-50%) scale(1);
+  }
+  to {
+    transform: translateX(-50%) scale(1.1);
+  }
 }
 
 /* Rotate the sunbeams around */
@@ -306,3 +323,7 @@
     transform: translateX(-100%);
   }
 }
+
+/* (your keyframes exactly as above) */
+
+.dummy { display: none; }

@@ -39,11 +39,6 @@ body.day-mode .flower__white-circle {
   background-color: #FFF9C4; /* very light yellow */
 }
 
-/* sparkles / lights */
-body.day-mode .flower__light {
-  background-color: #FFF59D; /* pale sunshine */
-}
-
 /* 🌸 Petals */
 body.day-mode .flower__leaf {
   background-image:

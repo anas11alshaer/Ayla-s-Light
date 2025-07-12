@@ -10,6 +10,7 @@
   left: -42vmin;
   transform-origin: bottom left;
 }
+
 .long-g--1 {
   bottom: 0vmin;
   transform: scale(0.8) rotate(-5deg);
@@ -23,19 +24,24 @@
   left: -2vmin;
   transform: rotate(3deg) rotateY(-180deg);
 }
-.long-g--2, .long-g--3 {
+
+.long-g--2,
+.long-g--3 {
   bottom: -3vmin;
   left: -35vmin;
   transform-origin: center;
   transform: scale(0.6) rotateX(60deg);
 }
-.long-g--2 .leaf, .long-g--3 .leaf {
+.long-g--2 .leaf,
+.long-g--3 .leaf {
   mask-image: linear-gradient(to top, transparent 50%, #079097 80%) !important;
 }
-.long-g--2 .leaf--1, .long-g--3 .leaf--1 {
+.long-g--2 .leaf--1,
+.long-g--3 .leaf--1 {
   left: -1vmin;
   transform: rotateY(-180deg);
 }
+
 .long-g--3 {
   left: -17vmin;
   bottom: 0vmin;
@@ -43,6 +49,7 @@
 .long-g--3 .leaf {
   mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
 }
+
 .long-g--4 {
   left: 25vmin;
   bottom: -3vmin;
@@ -52,11 +59,13 @@
 .long-g--4 .leaf {
   mask-image: linear-gradient(to top, transparent 50%, #079097 80%) !important;
 }
+
 .long-g--5 {
   left: 42vmin;
   bottom: 0vmin;
   transform: scale(0.8) rotate(2deg);
 }
+
 .long-g--6 {
   left: 0vmin;
   bottom: -20vmin;
@@ -64,6 +73,7 @@
   filter: blur(0.3vmin);
   transform: scale(0.8) rotate(2deg);
 }
+
 .long-g--7 {
   left: 35vmin;
   bottom: 20vmin;
@@ -72,6 +82,7 @@
   transform: scale(0.6) rotate(2deg);
   opacity: 0.7;
 }
+
 .long-g .leaf {
   --w: 15vmin;
   --h: 40vmin;

@@ -1,4 +1,5 @@
 /* ——— Grass & Sprout Elements ——— */
+
 .flower__grass {
   --c: #159faa;
   --line-w: 1.5vmin;
@@ -12,9 +13,11 @@
   transform-origin: bottom center;
   transform: rotate(-48deg) rotateY(40deg);
 }
+
 .flower__grass--1 {
   animation: moving-grass 2s linear infinite;
 }
+
 .flower__grass--2 {
   left: 2vmin;
   bottom: 10vmin;
@@ -23,6 +26,7 @@
   z-index: 0;
   animation: moving-grass--2 1.5s linear infinite;
 }
+
 .flower__grass--top {
   width: 7vmin;
   height: 10vmin;
@@ -31,12 +35,14 @@
   transform-origin: bottom center;
   transform: rotate(-2deg);
 }
+
 .flower__grass--bottom {
   margin-top: -2px;
   width: var(--line-w);
   height: 25vmin;
   background-image: linear-gradient(to top, transparent, var(--c));
 }
+
 .flower__grass__leaf {
   --size: 10vmin;
   position: absolute;
@@ -47,6 +53,7 @@
   background-image: linear-gradient(to top, transparent, transparent 30%, var(--c));
   z-index: 100;
 }
+
 .flower__grass__leaf--1 {
   top: -6%;
   left: 30%;
@@ -54,6 +61,7 @@
   transform: rotate(-20deg);
   animation: growing-grass-ans--1 2s 2.6s backwards;
 }
+
 .flower__grass__leaf--2 {
   top: -5%;
   left: -110%;
@@ -61,6 +69,7 @@
   transform: rotate(10deg);
   animation: growing-grass-ans--2 2s 2.4s linear backwards;
 }
+
 .flower__grass__leaf--3 {
   top: 5%;
   left: 60%;
@@ -68,6 +77,7 @@
   transform: rotate(-18deg) rotateX(-20deg);
   animation: growing-grass-ans--3 2s 2.2s linear backwards;
 }
+
 .flower__grass__leaf--4 {
   top: 6%;
   left: -135%;
@@ -75,6 +85,7 @@
   transform: rotate(2deg);
   animation: growing-grass-ans--4 2s 2s linear backwards;
 }
+
 .flower__grass__leaf--5 {
   top: 20%;
   left: 60%;
@@ -82,6 +93,7 @@
   transform: rotate(-24deg) rotateX(-20deg);
   animation: growing-grass-ans--5 2s 1.8s linear backwards;
 }
+
 .flower__grass__leaf--6 {
   top: 22%;
   left: -180%;
@@ -89,6 +101,7 @@
   transform: rotate(10deg);
   animation: growing-grass-ans--6 2s 1.6s linear backwards;
 }
+
 .flower__grass__leaf--7 {
   top: 39%;
   left: 70%;
@@ -96,6 +109,7 @@
   transform: rotate(-10deg);
   animation: growing-grass-ans--7 2s 1.4s linear backwards;
 }
+
 .flower__grass__leaf--8 {
   top: 40%;
   left: -215%;
@@ -103,6 +117,7 @@
   transform: rotate(10deg);
   animation: growing-grass-ans--8 2s 1.2s linear backwards;
 }
+
 .flower__grass__overlay {
   position: absolute;
   top: -10%;
@@ -113,9 +128,11 @@
   filter: blur(1.5vmin);
   z-index: 100;
 }
+
 .growing-grass {
   animation: growing-grass-ans 1s 2s backwards;
 }
+
 .flower__g-long {
   --w: 2vmin;
   --h: 6vmin;
@@ -130,10 +147,12 @@
   align-items: flex-end;
   animation: flower-g-long-ans 3s linear infinite;
 }
+
 .flower__g-long__top {
   top: calc(var(--h) * -1);
   width: calc(var(--w) + 1vmin);
 }
+
 .flower__g-long__bottom {
   margin-top: -2px;
   width: var(--w);

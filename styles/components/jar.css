@@ -1,0 +1,60 @@
+/* ——— Love-Jar ——— */
+.love-jar {
+  --glow: 0; /* updated via JS 0→1 */
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  width: 120px;
+  height: 160px;
+  border: 2px solid rgba(255,255,255,0.6);
+  border-radius: 10px 10px 6px 6px / 14px 14px 6px 6px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(4px);
+  box-shadow:
+    0 0 calc(40px * var(--glow)) rgba(255,240,200,0.6) inset,
+    0 0 6px rgba(255,255,255,0.3);
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 750;
+  transition: box-shadow 0.4s ease, transform 0.2s ease;
+}
+
+.love-jar:hover {
+  transform: translateY(-2px);
+}
+
+.love-jar:active {
+  transform: translateY(1px);
+}
+
+/* inner container for mini-fireflies */
+.jar-fireflies {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  pointer-events: none;
+}
+
+/* progress counter */
+.jar-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2px 0;
+  font: 600 0.75rem/1.2 'Courier New', monospace;
+  text-align: center;
+  color: #fff;
+  background: rgba(0,0,0,0.4);
+  pointer-events: none;
+}
+
+/* hide jar in day */
+body.day-mode .love-jar {
+  display: none;
+}
