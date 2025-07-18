@@ -151,11 +151,34 @@
         this.y = this.startY + (ty - this.startY) * this.t;
         if (this.t >= 1) this._finished = true;
       } else {
-        // random drift + bounce
-        if (this.x + this.r >= canvas.width || this.x - this.r <= 0) this.vx -= 0.07;
-        else this.vx += Math.random() * 0.34 - 0.17;
-        if (this.y + this.r >= canvas.height || this.y - this.r <= 0) this.vy -= 0.07;
-        else this.vy += Math.random() * 0.34 - 0.17;
+        // Get jar position
+        const jarRect = loveJar.getBoundingClientRect();
+        const jarCenter = {
+          x: jarRect.left + jarRect.width / 2,
+          y: jarRect.top + jarRect.height / 2
+        };
+        
+        // Calculate distance to jar center
+        const dx = this.x - jarCenter.x;
+        const dy = this.y - jarCenter.y;
+        const distToJar = Math.sqrt(dx * dx + dy * dy);
+        
+        // Define no-fly zone (jar bounds + padding)
+        const noFlyZone = jarRect.width/2 + 40; // 40px padding
+        
+        if (distToJar < noFlyZone) {
+          // Inside no-fly zone - adjust velocity to move away from jar
+          const angle = Math.atan2(dy, dx);
+          this.vx = angle;
+          this.vy = angle;
+        } else {
+          // Normal movement
+          if (this.x + this.r >= canvas.width || this.x - this.r <= 0) this.vx -= 0.07;
+          else this.vx += Math.random() * 0.34 - 0.17;
+          if (this.y + this.r >= canvas.height || this.y - this.r <= 0) this.vy -= 0.07;
+          else this.vy += Math.random() * 0.34 - 0.17;
+        }
+        
         this.x += 0.75 * Math.cos(this.vx);
         this.y += 0.75 * Math.sin(this.vy);
       }
@@ -186,7 +209,7 @@
     // set up canvas
     canvas = document.createElement('canvas');
     canvas.id = 'firefly-canvas';
-    Object.assign(canvas.style, { position: 'fixed', top: '0', left: '0', zIndex: 1, pointerEvents: 'auto' });
+    Object.assign(canvas.style, { position: 'fixed', top: '0', left: '0', zIndex: 800, pointerEvents: 'auto' });
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
 
@@ -311,11 +334,20 @@
   // —— Release all ——
   function releaseAll() {
     const jarRect = loveJar.getBoundingClientRect();
+    const jarCenterX = jarRect.left + jarRect.width / 2;
+    const jarCenterY = jarRect.top + jarRect.height / 2;
+    
     capturedFireflies.forEach(f => {
-      f.x = jarRect.left + jarRect.width / 2;
-      f.y = jarRect.top  + jarRect.height / 2;
-      f.vx = Math.random() * Math.PI;
-      f.vy = Math.random() * Math.PI;
+      f.x = jarCenterX;
+      f.y = jarCenterY;
+      
+      // Calculate a random angle for initial burst (0 to 2π)
+      const releaseAngle = Math.random() * Math.PI * 2;
+      // Give each firefly an initial velocity away from the jar
+      const initialSpeed = 2;  // Adjust this value to control burst speed
+      f.vx = Math.cos(releaseAngle) * initialSpeed;
+      f.vy = Math.sin(releaseAngle) * initialSpeed;
+      
       f.state = 'flying';
       f._finished = false;
       fireflies.push(f);
