@@ -1,4 +1,4 @@
-/* ——— Love-Jar ——— */
+/* ——— Love‑Jar ——— */
 .love-jar {
   --glow: 0; /* updated via JS 0→1 */
   position: fixed;
@@ -6,41 +6,34 @@
   left: 1rem;
   width: 120px;
   height: 160px;
-  border: 2px solid rgba(255,255,255,0.6);
+  border: 2px solid rgba(255, 255, 255, 0.6);
   border-radius: 10px 10px 6px 6px / 14px 14px 6px 6px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(4px);
   box-shadow:
-    0 0 calc(40px * var(--glow)) rgba(255,240,200,0.6) inset,
-    0 0 6px rgba(255,255,255,0.3);
+    0 0 calc(40px * var(--glow)) rgba(255, 240, 200, 0.6) inset,
+    0 0 6px rgba(255, 255, 255, 0.3);
   overflow: hidden;
   cursor: pointer;
   z-index: 750;
   transition: box-shadow 0.4s ease, transform 0.2s ease;
 }
 
-.love-jar:hover {
-  transform: translateY(-2px);
-}
+.love-jar:hover { transform: translateY(-2px); }
+.love-jar:active { transform: translateY(1px); }
 
-.love-jar:active {
-  transform: translateY(1px);
-}
-
-/* inner container for mini-fireflies */
+/* ——— Inner container for mini‑fireflies ——— */
 .jar-fireflies {
   position: absolute;
-  bottom: 12px;
-  left: 0;
-  right: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 4px;
+  top: 12px;
+  left: 8px;
+  right: 8px;
+  bottom: 24px;
+  overflow: hidden;
   pointer-events: none;
 }
 
-/* progress counter */
+/* ——— Progress counter ——— */
 .jar-progress {
   position: absolute;
   bottom: 0;
@@ -50,11 +43,52 @@
   font: 600 0.75rem/1.2 'Courier New', monospace;
   text-align: center;
   color: #fff;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   pointer-events: none;
 }
 
-/* hide jar in day */
-body.day-mode .love-jar {
-  display: none;
+/* ——— Captured fireflies ——— */
+.jar-fireflies .firefly {
+  /* size (width/height) and motion vars injected from JS */
+  --dx: 0px;
+  --dy: 0px;
+  --float-dur: 4s;   /* 3 – 7 s typical */
+  --flicker-dur: 1.2s;
+  border-radius: 50%;
+  background: radial-gradient(circle at center,
+              #ffffea 0%,
+              rgba(255,136,27,0.6) 30%,
+              rgba(255,136,27,0.1) 60%,
+              transparent 100%);
+  box-shadow: 0 0 0.4rem rgba(255,200,0,0.6);
+  pointer-events: none;
+
+  /* Two independent animations:
+     1. slow drift between (0,0) ➜ (dx,dy)
+     2. fast brightness flicker */
+  animation:
+    jar-firefly-float var(--float-dur) ease-in-out infinite alternate,
+    jar-firefly-glow  var(--flicker-dur) ease-in-out infinite alternate;
 }
+
+/* lazy drift */
+@keyframes jar-firefly-float {
+  to { transform: translate(var(--dx), var(--dy)); }
+}
+
+/* soft glow pulse (no transform to avoid clashing) */
+@keyframes jar-firefly-glow {
+  0%,100% {
+    opacity: 0.85;
+    box-shadow: 0 0 0.3rem rgba(255,200,0,0.4);
+    filter: blur(0.2px);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 0.6rem rgba(255,200,0,0.9);
+    filter: blur(0);
+  }
+}
+
+/* ——— Hide jar when day‑mode is active ——— */
+body.day-mode .love-jar { display: none; }
