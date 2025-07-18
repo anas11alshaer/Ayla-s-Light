@@ -2,15 +2,17 @@
 (() => {
   // —— Utilities ——
   const rng      = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-  const distance = (x1,y1,x2,y2) => Math.hypot(x2-x1, y2-y1);
+  const distance = (x1, y1, x2, y2) => Math.hypot(x2 - x1, y2 - y1);
 
   // —— Canvas & State ——
-  let canvas, ctx, animationID, maxRad;
+  let canvas, ctx, animationID;
   const fireflies = [];
+  const capturedFireflies = [];           // store captured Firefly instances
   let captured = 0;
   let currentCatch = null;
 
-  // —— Phrases & DOM refs ——
+  // —— Phrases ——
+  // (Make sure this array has exactly 100 entries)
   const phrases = [
     "You're my everything.",
     "I'm yours completely.",
@@ -112,25 +114,25 @@
     "You're my greatest gift.",
     "I can't imagine life without you.",
     "I'm yours until the end of time."
-  ];
+    ];
 
-
+  // —— DOM Refs ——
   let loveJar, jarFireflies, jarProgressEl;
   let phraseNote, phraseNoteTxt, phraseNoteClose, captureSound;
 
   // —— Firefly Class ——
   class Firefly {
-    constructor(x,y,r, phrase) {
+    constructor(x, y, r, phrase) {
       this.x = x; this.y = y; this.r = r;
       this.phrase = phrase;
-      this.vx = Math.random()*Math.PI;
-      this.vy = Math.random()*Math.PI;
-      this.glow = { strength: rng(100,220), growing: true };
-      this.state = 'flying'; // or 'caught' or 'to-jar'
-      this.t = 0; // for capture animation
+      this.vx = Math.random() * Math.PI;
+      this.vy = Math.random() * Math.PI;
+      this.glow = { strength: rng(100, 220), growing: true };
+      this.state = 'flying'; // or 'to-jar'
+      this.t = 0;
     }
     draw() {
-      // glow update
+      // glow pulse
       if (this.glow.growing) {
         this.glow.strength++;
         if (this.glow.strength >= 255) this.glow.growing = false;
@@ -138,35 +140,34 @@
         this.glow.strength--;
         if (this.glow.strength <= 80) this.glow.growing = true;
       }
-      // if "to-jar", move along a simple lerp
+
+      // move toward jar when caught
       if (this.state === 'to-jar') {
         this.t += 0.02;
         const jarRect = loveJar.getBoundingClientRect();
-        const tx = jarRect.left + jarRect.width/2;
-        const ty = jarRect.top  + jarRect.height/2;
-        this.x = this.startX + (tx - this.startX)*this.t;
-        this.y = this.startY + (ty - this.startY)*this.t;
-        if (this.t >= 1) {
-          this._finished = true;
-        }
+        const tx = jarRect.left + jarRect.width / 2;
+        const ty = jarRect.top + jarRect.height / 2;
+        this.x = this.startX + (tx - this.startX) * this.t;
+        this.y = this.startY + (ty - this.startY) * this.t;
+        if (this.t >= 1) this._finished = true;
       } else {
-        // normal flying
-        // bounce off edges
+        // random drift + bounce
         if (this.x + this.r >= canvas.width || this.x - this.r <= 0) this.vx -= 0.07;
-        else this.vx += Math.random()*0.34 - 0.17;
-        if (this.y + this.r >= canvas.height|| this.y - this.r <= 0) this.vy -= 0.07;
-        else this.vy += Math.random()*0.34 - 0.17;
+        else this.vx += Math.random() * 0.34 - 0.17;
+        if (this.y + this.r >= canvas.height || this.y - this.r <= 0) this.vy -= 0.07;
+        else this.vy += Math.random() * 0.34 - 0.17;
         this.x += 0.75 * Math.cos(this.vx);
         this.y += 0.75 * Math.sin(this.vy);
       }
-      // draw
-      const grad = ctx.createRadialGradient(this.x,this.y,this.r/5,this.x,this.y,this.r);
+
+      // draw glow
+      const grad = ctx.createRadialGradient(this.x, this.y, this.r/5, this.x, this.y, this.r);
       grad.addColorStop(0, `#ffffea`);
-      const hexGlow = this.glow.strength.toString(16).padStart(2,'0');
+      const hexGlow = this.glow.strength.toString(16).padStart(2, '0');
       grad.addColorStop(0.1, `#ff881b${hexGlow}`);
       grad.addColorStop(1, `#ff881b00`);
       ctx.beginPath();
-      ctx.arc(this.x,this.y,this.r,0,2*Math.PI);
+      ctx.arc(this.x, this.y, this.r, 0, 2*Math.PI);
       ctx.fillStyle = grad;
       ctx.fill();
     }
@@ -174,7 +175,6 @@
 
   // —— Initialization ——
   window.initFireflyApp = () => {
-    // grab DOM
     loveJar       = document.getElementById('loveJar');
     jarFireflies  = document.getElementById('jarFireflies');
     jarProgressEl = document.getElementById('jarProgress');
@@ -183,56 +183,46 @@
     phraseNoteClose = document.getElementById('phraseNoteClose');
     captureSound  = document.getElementById('captureSound');
 
-    // canvas
+    // set up canvas
     canvas = document.createElement('canvas');
     canvas.id = 'firefly-canvas';
-    Object.assign(canvas.style, {
-      position: 'fixed', top:'0', left:'0',
-      zIndex: 1, pointerEvents: 'auto' // we need clicks
-    });
+    Object.assign(canvas.style, { position: 'fixed', top: '0', left: '0', zIndex: 1, pointerEvents: 'auto' });
     document.body.appendChild(canvas);
     ctx = canvas.getContext('2d');
 
-    // sizing & events
     const resize = () => {
       canvas.width = window.innerWidth;
-      canvas.height= window.innerHeight;
+      canvas.height = window.innerHeight;
     };
     resize();
     window.addEventListener('resize', resize);
     canvas.addEventListener('click', onCanvasClick);
 
-    // initial population
-    maxRad = Math.floor((window.innerWidth+window.innerHeight)/100) * 0.5;
-    const count = Math.floor((window.innerWidth+window.innerHeight)/80);
-    for (let i=0; i<count; i++) {
-      const r = rng(4,14);
-      const x = rng(r, canvas.width-r);
-      const y = rng(r, canvas.height-r);
-      fireflies.push(new Firefly(x,y,r, phrases[i]));
+    // spawn one firefly per phrase
+    for (let i = 0; i < phrases.length; i++) {
+      const r = rng(4, 14);
+      const x = rng(r, canvas.width - r);
+      const y = rng(r, canvas.height - r);
+      fireflies.push(new Firefly(x, y, r, phrases[i]));
     }
 
     phraseNoteClose.addEventListener('click', onPhraseClose);
     loveJar.addEventListener('click', releaseAll);
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && phraseNote.classList.contains('note--visible')) {
-        phraseNoteClose.click();
-      }
+      if (e.key === 'Escape' && phraseNote.classList.contains('note--visible')) phraseNoteClose.click();
     });
 
     animate();
   };
 
-  // —— Main Loop ——
+  // —— Animation Loop ——
   function animate() {
     animationID = requestAnimationFrame(animate);
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     fireflies.forEach(f => f.draw());
-    // cleanup those that finished flying to jar
-    for (let i=fireflies.length-1; i>=0; i--) {
-      if (fireflies[i]._finished) {
-        fireflies.splice(i,1);
-      }
+    // remove those that reached the jar
+    for (let i = fireflies.length - 1; i >= 0; i--) {
+      if (fireflies[i]._finished) fireflies.splice(i, 1);
     }
   }
 
@@ -243,7 +233,7 @@
     const mx = e.clientX - rect.left;
     const my = e.clientY - rect.top;
     for (const f of fireflies) {
-      if (distance(f.x,f.y, mx,my) < f.r) {
+      if (distance(f.x, f.y, mx, my) < f.r) {
         catchFirefly(f);
         break;
       }
@@ -252,11 +242,9 @@
 
   function catchFirefly(f) {
     currentCatch = f;
-    // pop the note
     phraseNote.classList.add('note--visible');
-    phraseNoteTxt.innerHTML = ''; // clear existing
-    // typewriter effect
-    [...f.phrase].forEach((ch,i) => {
+    phraseNoteTxt.innerHTML = '';
+    [...f.phrase].forEach((ch, i) => {
       const span = document.createElement('span');
       span.textContent = ch;
       span.style.animationDelay = `${i*40}ms`;
@@ -266,20 +254,15 @@
     captureSound.play();
   }
 
-  // —— After closing the phrase note ——
+  // —— After closing phrase ——
   function onPhraseClose() {
     phraseNote.classList.remove('note--visible');
     if (!currentCatch) return;
+    currentCatch.state  = 'to-jar';
+    currentCatch.startX = currentCatch.x;
+    currentCatch.startY = currentCatch.y;
+    currentCatch.t      = 0;
 
-    // animate it toward jar
-    currentCatch.state   = 'to-jar';
-    currentCatch.startX  = currentCatch.x;
-    currentCatch.startY  = currentCatch.y;
-    currentCatch.t       = 0;
-
-    // once it reaches jar, push mini-DOM firefly
-    // we'll check _finished flag in animate() loop and then do store()
-    // so wrap store in a tiny timeout
     const checkDone = () => {
       if (currentCatch._finished) {
         storeFirefly(currentCatch);
@@ -291,12 +274,20 @@
     checkDone();
   }
 
+  // —— Store in jar ——
   function storeFirefly(f) {
-    // mini-egg in jar
+    capturedFireflies.push(f);            // keep instance for release
+
     const mini = document.createElement('div');
     mini.className = 'firefly firefly--captured';
     mini.style.width  = `${f.r}px`;
     mini.style.height = `${f.r}px`;
+    const dx = rng(-10, 10);
+    const dy = rng(-10, 10);
+    const dur = (rng(30, 70) / 10) + 's';
+    mini.style.setProperty('--dx', `${dx}px`);
+    mini.style.setProperty('--dy', `${dy}px`);
+    mini.style.setProperty('--float-dur', dur);
     jarFireflies.appendChild(mini);
 
     captured++;
@@ -304,8 +295,7 @@
     loveJar.setAttribute('aria-label', `Captured fireflies – ${captured} / 100`);
     loveJar.style.setProperty('--glow', (captured/100).toFixed(2));
 
-    if (captured%20===0) {
-      // sprout extra flower
+    if (captured % 20 === 0) {
       const base = document.querySelector('.flower');
       if (base) {
         const clone = base.cloneNode(true);
@@ -316,31 +306,28 @@
         document.querySelector('.flowers').appendChild(clone);
       }
     }
-
-    // spawn one new firefly for next phrase
-    const idx = captured + (fireflies.length);
-    if (phrases[idx]) {
-      const r = rng(4,14);
-      const x = rng(r, canvas.width-r);
-      const y = rng(r, canvas.height-r);
-      fireflies.push(new Firefly(x,y,r, phrases[idx]));
-    }
   }
 
-  // —— Release all from jar ——
+  // —— Release all ——
   function releaseAll() {
-    // clear jar DOM
+    const jarRect = loveJar.getBoundingClientRect();
+    capturedFireflies.forEach(f => {
+      f.x = jarRect.left + jarRect.width / 2;
+      f.y = jarRect.top  + jarRect.height / 2;
+      f.vx = Math.random() * Math.PI;
+      f.vy = Math.random() * Math.PI;
+      f.state = 'flying';
+      f._finished = false;
+      fireflies.push(f);
+    });
+    capturedFireflies.length = 0;
+
     jarFireflies.innerHTML = '';
     captured = 0;
     jarProgressEl.textContent = '0 / 100';
-    loveJar.setAttribute('aria-label','Captured fireflies - 0 / 100');
+    loveJar.setAttribute('aria-label','Captured fireflies – 0 / 100');
     loveJar.style.setProperty('--glow','0');
-
-    // reset all existing Catch flags & respawn full initial set
-    fireflies.length = 0;
-    initFireflyApp();
   }
 
-  // —— Kick it off on window.onload ——
   window.addEventListener('load', initFireflyApp);
 })();
