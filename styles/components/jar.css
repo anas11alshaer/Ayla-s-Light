@@ -1,4 +1,4 @@
-/* ——— Love‑Jar ——— */
+/* ——— Love-Jar ——— */
 .love-jar {
   --glow: 0; /* updated via JS 0→1 */
   position: fixed;
@@ -15,14 +15,14 @@
     0 0 6px rgba(255, 255, 255, 0.3);
   overflow: hidden;
   cursor: pointer;
-  z-index: 750;
+  z-index: 900; /* raised above firefly canvas so the jar regains clickability */
   transition: box-shadow 0.4s ease, transform 0.2s ease;
 }
 
-.love-jar:hover { transform: translateY(-2px); }
+.love-jar:hover  { transform: translateY(-2px); }
 .love-jar:active { transform: translateY(1px); }
 
-/* ——— Inner container for mini‑fireflies ——— */
+/* ——— Inner container for mini-fireflies ——— */
 .jar-fireflies {
   position: absolute;
   top: 12px;
@@ -52,7 +52,7 @@
   /* size (width/height) and motion vars injected from JS */
   --dx: 0px;
   --dy: 0px;
-  --float-dur: 4s;   /* 3 – 7 s typical */
+  --float-dur: 4s;   /* 3 – 7 s typical */
   --flicker-dur: 1.2s;
   border-radius: 50%;
   background: radial-gradient(circle at center,
@@ -90,5 +90,5 @@
   }
 }
 
-/* ——— Hide jar when day‑mode is active ——— */
+/* ——— Hide jar when day-mode is active ——— */
 body.day-mode .love-jar { display: none; }
